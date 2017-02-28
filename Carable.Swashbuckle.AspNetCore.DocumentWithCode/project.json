@@ -1,9 +1,9 @@
 ﻿{
-  "version": "0.0.1-*",
+  "version": "0.0.2-*",
   "description": "Allows you to customize your swagger documentation using code, including support for providing multiple examples for responses and parameters.",
 
   "packOptions": {
-    "releaseNotes": "Updated to use Swashbuckle.AspNetCore 1.0.0-rc1",
+    "releaseNotes": "Added an extra conveniance method",
     "requireLicenseAcceptance": false,
     "licenseUrl": "https://github.com/Carable/Carable.Swagger.DocumentWithCode/LICENSE",
     "owners": [
