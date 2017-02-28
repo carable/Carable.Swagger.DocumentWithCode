@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using SampleWebApi.Dto;
 using SampleWebApi.Models;
 using SampleWebApi.Models.Examples;
 

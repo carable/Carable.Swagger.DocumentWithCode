@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Carable.Swashbuckle.AspNetCore.DocumentWithCode;
+using SampleWebApi.Dto;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 

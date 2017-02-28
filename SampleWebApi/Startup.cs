@@ -1,4 +1,5 @@
 using System.IO;
+using System.Reflection;
 using Carable.Swashbuckle.AspNetCore.DocumentWithCode;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
+using SampleWebApi.Dto;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SampleWebApi
@@ -43,6 +45,10 @@ namespace SampleWebApi
                 options.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
                 var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "SampleWebApi.xml");
                 options.IncludeXmlComments(filePath);
+                if (!options.TryIncludeXmlFromAssembly(typeof(Customer).GetTypeInfo().Assembly))
+                {
+                    // LOG FAILURE!
+                }
             });
             services.ConfigureSwaggerGen(options =>
             {

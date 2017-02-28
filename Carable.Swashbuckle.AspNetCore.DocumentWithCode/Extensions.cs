@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -72,6 +74,23 @@ namespace Carable.Swashbuckle.AspNetCore.DocumentWithCode
             return schemaRegistry.Definitions[exampleFakeTypeName];
         }
 
-
+        /// <summary>
+        /// Try to include the assembly xml documentation.
+        /// </summary>
+        /// <param name="options">swagger gen options</param>
+        /// <param name="assembly">The assembly with documenation</param>
+        /// <returns>true if the documentation file was found</returns>
+        public static bool TryIncludeXmlFromAssembly(this SwaggerGenOptions options, Assembly assembly)
+        {
+            var path = Path.GetDirectoryName(assembly.Location);
+            var file = Path.Combine(path,
+                Path.GetFileNameWithoutExtension(assembly.Location) + ".xml");
+            if (File.Exists(file))
+            {
+                options.IncludeXmlComments(file);
+                return true;
+            }
+            return false;
+        }
     }
 }
