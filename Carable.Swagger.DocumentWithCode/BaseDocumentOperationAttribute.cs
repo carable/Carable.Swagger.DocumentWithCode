@@ -4,9 +4,8 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Carable.Swagger.DocumentWithCode
 {
-    public abstract class BaseDocumentOperation : Attribute
+    public abstract class BaseDocumentOperationAttribute : Attribute
     {
-        // ReSharper disable UnusedParameter.Local
         public abstract void Apply(Operation operation, ISchemaRegistry schemaRegistry);
     }
 }

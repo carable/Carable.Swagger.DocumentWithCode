@@ -5,7 +5,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SampleWebApi.Models.Examples
 {
-    public class ExampleInputCustomerAttribute:BaseDocumentOperation
+    public class ExampleInputCustomerAttribute:BaseDocumentOperationAttribute
     {
         public override void Apply(Operation operation, ISchemaRegistry schemaRegistry)
         {

@@ -3,19 +3,18 @@
 This works with @domaindrivendev [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
 
 ## Why?
-I created this so that you can embellish your Web API Swagger documentation using code via an OperationFilter. I prefer doing this for a couple of reasons:
-* I don't pollute the API code with XML comments
-* If required I can separate the documentation from the code 
-* I can provide detailed and contextual request or response examples
-* I can workaround providing multiple request or response examples (https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/228
+
+The code here is to embellish your Web API Swagger documentation using code via attributes:
+* You can provide detailed and contextual request or response examples
+* You can workaround providing multiple request or response examples (https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/228
 and https://github.com/domaindrivendev/Swashbuckle/issues/397)
 
 ## Getting Started 
 Install the [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) package and configure as normal.
 
-Install the DalSoft.Swagger.DocumentCodeWithCode package using NuGet.
+Install the Carable.Swagger.DocumentWithCode package using NuGet.
 ```dos
-PM> Install-Package DalSoft.Swagger.DocumentCodeWithCode
+PM> Install-Package Carable.Swagger.DocumentWithCode
 ```
 Modify startup.cs to include the OperationFilter.
 ```cs
@@ -25,24 +24,18 @@ public void ConfigureServices(IServiceCollection services)
     services.AddSwaggerGen(options =>
     {
         ...
-        options.OperationFilter<DocumentCodeWithCode>(typeof(Startup).GetTypeInfo().Assembly);
+        options.OperationFilter<DocumentationAttributesOperationFilter>();
     });
 }
 ```
 
 ## Providing Documenation using Code
 
-The first thing you need to do is find the the generated OperationId for the API method you want to document, this easily found using Swagger UI. Click on the method you want document and use the OperationId which is the last part of the URL.
-
-![OperationId](http://www.dalsoft.co.uk/blog/wp-content/uploads/2017/01/swaggerOperationId.png)
-
-Now for this example create a class called addPet.cs anywhere in your solution, I usually create a folder called SwaggerDocs.
-
-Inherit the BaseDocumentOperation and it's abstract ctor. Now you can you document by setting the properties in the ctor.
+Inherit the BaseDocumentOperation. Now you can you document by setting the properties.
 ```cs
-public class addPet : BaseDocumentOperation
+public class AddPetAttribute : BaseDocumentOperationAttribute
 {
-    public addPet(Operation operation, ISchemaRegistry schemaRegistry) : base(operation, schemaRegistry)
+    public override void Apply(Operation operation, ISchemaRegistry schemaRegistry) 
     {
         operation.Summary = "Add a new pet to the store";
         operation.Description = "Pet object that needs to be added to the store";
@@ -54,17 +47,14 @@ public class addPet : BaseDocumentOperation
 Use the the extension AddExampleToParameter and AddOrUpdate to provide request and response examples.
 
 ```cs
-public class addPet : BaseDocumentOperation
+public class AddPetAttribute : BaseDocumentOperationAttribute
 {
-    public addPet(Operation operation, ISchemaRegistry schemaRegistry) : base(operation, schemaRegistry)
+    public override void Apply(Operation operation, ISchemaRegistry schemaRegistry)
     {
-        var exampleRequest = (BodyParameter) operation.Parameters.Single(_ => _.Name == "body");
+    	operation.Parameters.Single(p=>p.Name=="pet").AddExampleToParameter(schemaRegistry, operation.OperationId, 
+        	new Pet { Id = 1, Name = "doggie", Status = "available" });
         
-        exampleRequest.AddExampleToParameter(schemaRegistry, operation.OperationId, 
-        new Pet { Id = 1, Name = "doggie", Status = "available" });
-        
-        var exampleResponse = new Pet[] { new Pet { Id = 1, Name = "doggie", Status = "available" } };
-        
+        var exampleResponse = new Pet[] { new Pet { Id = 1, Name = "doggie", Status = "available" } };        
         operation.Responses.AddOrUpdate(schemaRegistry, operation.OperationId, "200", new Response
         {
             Description = "success"
@@ -76,9 +66,9 @@ public class addPet : BaseDocumentOperation
 ## Providing Multiple Example using Code
 Use the allowMultipleExamples parameter for AddExampleToParameter and AddOrUpdate to provide multiple examples. Multiple examples are useful for shared resources such as errors.
 ```cs
-public class addPet : BaseDocumentOperation
+public class AddPetAttribute : BaseDocumentOperationAttribute
 {
-    public addPet(Operation operation, ISchemaRegistry schemaRegistry) : base(operation, schemaRegistry)
+    public override void Apply(Operation operation, ISchemaRegistry schemaRegistry)
     {
         var loginFailed = new Error { Id="loginFailed"  Description = "Login has Failed" };
             
@@ -90,40 +80,5 @@ public class addPet : BaseDocumentOperation
         operation.Responses.AddOrUpdate(schemaRegistry, operation.OperationId, "400",
         new Response { Description = "Validation Failed"}, example:validationFailed, allowMultipleExamples:true);
     }
-}
-```
-
-## Custom Serialization for your examples
-If you use custom serialization you can ensure that your examples use same the serialization by using the customJsonSerializerSettings parameter.
-```cs
-public class addPet : BaseDocumentOperation
-{
-    public addPet(Operation operation, ISchemaRegistry schemaRegistry) : base(operation, schemaRegistry)
-    {
-        var exampleResponse = new Pet[] { new Pet { Id = 1, Name = "doggie", Status = "available" } };
-        
-        operation.Responses.AddOrUpdate(schemaRegistry, operation.OperationId, "200", new Response
-        {
-            Description = "success"
-        }, example:exampleResponse, 
-        customJsonSerializerSettings:new JsonSerializerSettings 
-        { 
-            ContractResolver = new DefaultContractResolver { NamingStrategy = new SnakeCaseNamingStrategy() } 
-        });
-    }
-}
-```
-
-## Store your documentation in a separate project
-Just move your Swagger documentation classes to the project you want to use and pass the project assembly to the OperationFilter.
-```cs
-public void ConfigureServices(IServiceCollection services)
-{
-    ...
-    services.AddSwaggerGen(options =>
-    {
-        ...
-        options.OperationFilter<DocumentCodeWithCode>(typeof(AnyClassContainingTheDocumentation).GetTypeInfo().Assembly);
-    });
 }
 ```

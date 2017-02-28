@@ -9,7 +9,7 @@ namespace Carable.Swagger.DocumentWithCode
         public void Apply(Operation operation, OperationFilterContext context)
         {
             var attributes = context.ApiDescription.ActionAttributes()
-                .OfType<BaseDocumentOperation>()
+                .OfType<BaseDocumentOperationAttribute>()
                 .ToList();
             foreach (var attribute in attributes)
             {
