@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace DalSoft.Swagger.DocumentCodeWithCode
+namespace Carable.Swagger.DocumentWithCode
 {
     public static class Extensions
     {

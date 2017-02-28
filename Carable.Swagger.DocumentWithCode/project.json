@@ -1,16 +1,16 @@
 ﻿{
-  "version": "1.0.2-*",
+  "version": "0.0.1-*",
   "description": "Allows you to customize your swagger documentation using code, including support for providing multiple examples for responses and parameters.",
 
   "packOptions": {
     "releaseNotes": "Updated to use Swashbuckle.AspNetCore 1.0.0-rc1",
     "requireLicenseAcceptance": false,
-    "licenseUrl": "https://github.com/DalSoft/DalSoft.Swagger.DocumentCodeWithCode/LICENSE",
+    "licenseUrl": "https://github.com/Carable/Carable.Swagger.DocumentWithCode/LICENSE",
     "owners": [
-      "DalSoft"
+      "Carable"
     ],
     "iconUrl": "",
-    "projectUrl": "https://github.com/DalSoft/DalSoft.Swagger.DocumentCodeWithCode",
+    "projectUrl": "https://github.com/Carable/Carable.Swagger.DocumentWithCode",
     "summary": "Allows you to customize your swagger documentation using code",
     "tags": [
       "swagger",

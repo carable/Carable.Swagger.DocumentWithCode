@@ -35,3 +35,9 @@ _ReSharper.*
 
 # NUNIT
 TestResult.xml
+
+# user specific
+*.userprefs
+
+# idea
+.idea

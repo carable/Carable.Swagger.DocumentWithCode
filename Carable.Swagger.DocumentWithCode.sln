@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DalSoft.Swagger.DocumentCodeWithCode", "DalSoft.Swagger.DocumentCodeWithCode\DalSoft.Swagger.DocumentCodeWithCode.xproj", "{009E6720-ADCE-4F74-956F-DDCFD684FCA2}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Carable.Swagger.DocumentWithCode", "Carable.Swagger.DocumentWithCode\Carable.Swagger.DocumentWithCode.xproj", "{009E6720-ADCE-4F74-956F-DDCFD684FCA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
