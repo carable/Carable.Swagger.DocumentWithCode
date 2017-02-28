@@ -23,13 +23,17 @@
     ]
   },
 
+  "buildOptions": {
+      "xmlDoc": true
+  },
+
   "dependencies": {
-    "Swashbuckle.AspNetCore": "1.0.0-rc1"
+    "Swashbuckle.AspNetCore": "1.0.0-rc3"
   },
 
   "frameworks": {
     "net46": {},
-    "netcoreapp1.0": {
+    "netcoreapp1.1": {
       "imports": [
         "dotnet5.6",
         "portable-net45+win8"

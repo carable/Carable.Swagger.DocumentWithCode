@@ -4,15 +4,17 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Carable.Swagger.DocumentWithCode
 {
-    public class DocumentationAttributesOperationFilter
+    public class DocumentationAttributesOperationFilter : IOperationFilter
     {
         public void Apply(Operation operation, OperationFilterContext context)
         {
-            var attribute = context.ApiDescription.ActionAttributes()
+            var attributes = context.ApiDescription.ActionAttributes()
                 .OfType<BaseDocumentOperation>()
-                .FirstOrDefault();
-
-            attribute?.Apply(operation, context.SchemaRegistry);
+                .ToList();
+            foreach (var attribute in attributes)
+            {
+                attribute.Apply(operation, context.SchemaRegistry);
+            }
         }
     }
 }

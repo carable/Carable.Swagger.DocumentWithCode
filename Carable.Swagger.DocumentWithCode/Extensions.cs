@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -7,7 +8,7 @@ namespace Carable.Swagger.DocumentWithCode
 {
     public static class Extensions
     {
-        public static void AddOrUpdate(this IDictionary<string, Response> responseDictionary, ISchemaRegistry schemaRegistry, string operationId, string statusCode, Response response, object example = null, bool allowMultipleExamples = false, JsonSerializerSettings customJsonSerializerSettings = null)
+        public static void AddOrUpdate(this IDictionary<string, Response> responseDictionary, ISchemaRegistry schemaRegistry, string operationId, string statusCode, Response response, object example = null, bool allowMultipleExamples = false)
         {
             if (responseDictionary.ContainsKey(statusCode))
                 responseDictionary[statusCode] = response;
@@ -15,13 +16,23 @@ namespace Carable.Swagger.DocumentWithCode
                 responseDictionary.Add(statusCode, response);
 
             if (example!=null)
-                responseDictionary[statusCode].Schema = schemaRegistry.AddExampleToSchemaDefinitions(operationId, example, statusCode, allowMultipleExamples, customJsonSerializerSettings);
+                responseDictionary[statusCode].Schema = schemaRegistry.AddExampleToSchemaDefinitions(operationId, example, statusCode, allowMultipleExamples);
         }
 
-        public static void AddExampleToParameter(this BodyParameter parameter, ISchemaRegistry schemaRegistry, string operationId, object example, bool allowMultipleExamples = false, JsonSerializerSettings customJsonSerializerSettings = null)
+        public static void AddExampleToParameter(this IParameter parameter, ISchemaRegistry schemaRegistry, string operationId, object example, bool allowMultipleExamples = false)
         {
-            if (example != null)
-                parameter.Schema = schemaRegistry.AddExampleToSchemaDefinitions(operationId, example, allowMultipleExamples:allowMultipleExamples, customJsonSerializerSettings:customJsonSerializerSettings);
+            if (example == null) return;
+
+            var bodyParameter = parameter as BodyParameter;
+            if (bodyParameter != null)
+            {
+                bodyParameter.Schema = schemaRegistry.AddExampleToSchemaDefinitions(operationId,
+                    example, allowMultipleExamples: allowMultipleExamples);
+            }
+            else
+            {
+                throw new NotImplementedException($"Unknown type of parameter! {parameter.GetType().Name}");
+            }
         }
 
         //TODO: https://github.com/domaindrivendev/Ahoy/issues/234
@@ -31,7 +42,7 @@ namespace Carable.Swagger.DocumentWithCode
         //        parameter.Schema = schemaRegistry.AddDefaultToSchemaDefinitions(operationId, @default);
         //}
         
-        private static Schema AddExampleToSchemaDefinitions(this ISchemaRegistry schemaRegistry, string operationId, object example, string statusCode=null, bool allowMultipleExamples=false, JsonSerializerSettings customJsonSerializerSettings = null)
+        private static Schema AddExampleToSchemaDefinitions(this ISchemaRegistry schemaRegistry, string operationId, object example, string statusCode=null, bool allowMultipleExamples=false)
         {
             var type = example.GetType();
             schemaRegistry.GetOrRegister(type);
@@ -40,7 +51,7 @@ namespace Carable.Swagger.DocumentWithCode
             var schema = schemaRegistry.Definitions[actualTypeName];
             if (!allowMultipleExamples)
             {
-                schema.Example = example.UseCustomJsonSerializerSettings(customJsonSerializerSettings);
+                schema.Example = example;
                 return schema;
             }
 
@@ -55,16 +66,13 @@ namespace Carable.Swagger.DocumentWithCode
             schemaRegistry.Definitions.Add(exampleFakeTypeName, new Schema
             {
                 Ref = "#/definitions/" + exampleFakeTypeName,
-                Example = example.UseCustomJsonSerializerSettings(customJsonSerializerSettings),
+                Example = example,
                 Properties = schema?.Properties
             });
 
             return schemaRegistry.Definitions[exampleFakeTypeName];
         }
 
-        private static object UseCustomJsonSerializerSettings(this object @object, JsonSerializerSettings customJsonSerializerSettings)
-        {
-            return customJsonSerializerSettings == null ? @object : JsonConvert.DeserializeObject(JsonConvert.SerializeObject(@object, customJsonSerializerSettings));
-        }
+
     }
 }
