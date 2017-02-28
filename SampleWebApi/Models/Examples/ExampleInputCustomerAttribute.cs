@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Carable.Swagger.DocumentWithCode;
+using Carable.Swashbuckle.AspNetCore.DocumentWithCode;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 

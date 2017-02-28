@@ -2,7 +2,7 @@ using System;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Carable.Swagger.DocumentWithCode
+namespace Carable.Swashbuckle.AspNetCore.DocumentWithCode
 {
     public abstract class BaseDocumentOperationAttribute : Attribute
     {
