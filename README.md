@@ -1,4 +1,4 @@
-# Swagger Document With Code
+# Swagger Document With Code [![Build status](https://ci.appveyor.com/api/projects/status/tm3bkjsgxpo1rjh1/branch/master?svg=true)](https://ci.appveyor.com/project/wallymathieugarantibil/carable-swashbuckle-aspnetcore-documentwithcode/branch/master)
 
 This works with @domaindrivendev [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
 
