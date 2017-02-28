@@ -1,6 +1,10 @@
-# Swagger Document Code With Code
+# Swagger Document With Code
 
 This works with @domaindrivendev [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
+
+## This is a fork of Document Code With Code
+
+If your philosophy about documentation align with that view, then use [DalSoft.Swagger.DocumentCodeWithCode](https://github.com/DalSoft/DalSoft.Swagger.DocumentCodeWithCode) instead.
 
 ## Why?
 
