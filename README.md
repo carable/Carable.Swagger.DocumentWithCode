@@ -16,9 +16,9 @@ and https://github.com/domaindrivendev/Swashbuckle/issues/397)
 ## Getting Started 
 Install the [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) package and configure as normal.
 
-Install the Carable.Swagger.DocumentWithCode package using NuGet.
+Install the Carable.Swashbuckle.AspNetCore.DocumentWithCode package using NuGet.
 ```dos
-PM> Install-Package Carable.Swagger.DocumentWithCode
+PM> Install-Package Carable.Swashbuckle.AspNetCore.DocumentWithCode
 ```
 Modify startup.cs to include the OperationFilter.
 ```cs
