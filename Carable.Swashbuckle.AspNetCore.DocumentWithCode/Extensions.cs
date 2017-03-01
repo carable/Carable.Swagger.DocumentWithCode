@@ -50,18 +50,11 @@ namespace Carable.Swashbuckle.AspNetCore.DocumentWithCode
 
             var actualTypeName = type.Name.Replace("[]", string.Empty);
             var schema = schemaRegistry.Definitions[actualTypeName];
-            //if (!allowMultipleExamples)
-            //{
-            //    schema.Example = example;
-            //    return schema;
-            //}
-
-            string exampleFakeTypeName;
-                
-            if (statusCode==null)
-               exampleFakeTypeName = "examples<=" + actualTypeName + "<=" + operationId;
-            else
-               exampleFakeTypeName = "examples=>" + operationId + "=>" + statusCode + "=>" + actualTypeName;
+            string exampleFakeTypeName=actualTypeName;
+            while (schemaRegistry.Definitions.ContainsKey(exampleFakeTypeName))
+            {
+                exampleFakeTypeName += "'";// we do not want long type names, rather just append some ' to have short names
+            }
 
             //Why? https://github.com/domaindrivendev/Ahoy/issues/228 and https://github.com/domaindrivendev/Swashbuckle/issues/397
             schemaRegistry.Definitions.Add(exampleFakeTypeName, new Schema
