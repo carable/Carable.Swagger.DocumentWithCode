@@ -67,22 +67,3 @@ public class AddPetAttribute : BaseDocumentOperationAttribute
 }
 ```
 
-## Providing Multiple Example using Code
-Use the allowMultipleExamples parameter for AddExampleToParameter and AddOrUpdate to provide multiple examples. Multiple examples are useful for shared resources such as errors.
-```cs
-public class AddPetAttribute : BaseDocumentOperationAttribute
-{
-    public override void Apply(Operation operation, ISchemaRegistry schemaRegistry)
-    {
-        var loginFailed = new Error { Id="loginFailed"  Description = "Login has Failed" };
-            
-        operation.Responses.AddOrUpdate(schemaRegistry, operation.OperationId, "401", 
-        new Response { Description = "Login Failed" }, example:loginFailed, allowMultipleExamples:true);
-        
-        var validationFailed = new Error { Id="validationFailed"  Description = "Validation Failed" };
-        
-        operation.Responses.AddOrUpdate(schemaRegistry, operation.OperationId, "400",
-        new Response { Description = "Validation Failed"}, example:validationFailed, allowMultipleExamples:true);
-    }
-}
-```
