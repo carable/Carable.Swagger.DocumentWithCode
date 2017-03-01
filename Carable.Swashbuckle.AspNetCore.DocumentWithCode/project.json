@@ -1,9 +1,9 @@
 ﻿{
-  "version": "0.0.2-*",
+  "version": "0.0.3-*",
   "description": "Allows you to customize your swagger documentation using code, including support for providing multiple examples for responses and parameters.",
 
   "packOptions": {
-    "releaseNotes": "Added an extra conveniance method",
+    "releaseNotes": "Removed allow multiple examples parameter",
     "requireLicenseAcceptance": false,
     "licenseUrl": "https://github.com/Carable/Carable.Swagger.DocumentWithCode/LICENSE",
     "owners": [
