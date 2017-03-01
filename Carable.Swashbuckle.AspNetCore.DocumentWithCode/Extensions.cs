@@ -9,7 +9,7 @@ namespace Carable.Swashbuckle.AspNetCore.DocumentWithCode
 {
     public static class Extensions
     {
-        public static void AddOrUpdate(this IDictionary<string, Response> responseDictionary, ISchemaRegistry schemaRegistry, string operationId, string statusCode, Response response, object example = null, bool allowMultipleExamples = false)
+        public static void AddOrUpdate(this IDictionary<string, Response> responseDictionary, ISchemaRegistry schemaRegistry, string operationId, string statusCode, Response response, object example = null)
         {
             if (responseDictionary.ContainsKey(statusCode))
                 responseDictionary[statusCode] = response;
@@ -17,10 +17,10 @@ namespace Carable.Swashbuckle.AspNetCore.DocumentWithCode
                 responseDictionary.Add(statusCode, response);
 
             if (example!=null)
-                responseDictionary[statusCode].Schema = schemaRegistry.AddExampleToSchemaDefinitions(operationId, example, statusCode, allowMultipleExamples);
+                responseDictionary[statusCode].Schema = schemaRegistry.AddExampleToSchemaDefinitions(operationId, example, statusCode);
         }
 
-        public static void AddExampleToParameter(this IParameter parameter, ISchemaRegistry schemaRegistry, string operationId, object example, bool allowMultipleExamples = false)
+        public static void AddExampleToParameter(this IParameter parameter, ISchemaRegistry schemaRegistry, string operationId, object example)
         {
             if (example == null) return;
 
@@ -28,7 +28,7 @@ namespace Carable.Swashbuckle.AspNetCore.DocumentWithCode
             if (bodyParameter != null)
             {
                 bodyParameter.Schema = schemaRegistry.AddExampleToSchemaDefinitions(operationId,
-                    example, allowMultipleExamples: allowMultipleExamples);
+                    example);
             }
             else
             {
@@ -43,18 +43,18 @@ namespace Carable.Swashbuckle.AspNetCore.DocumentWithCode
         //        parameter.Schema = schemaRegistry.AddDefaultToSchemaDefinitions(operationId, @default);
         //}
         
-        private static Schema AddExampleToSchemaDefinitions(this ISchemaRegistry schemaRegistry, string operationId, object example, string statusCode=null, bool allowMultipleExamples=false)
+        private static Schema AddExampleToSchemaDefinitions(this ISchemaRegistry schemaRegistry, string operationId, object example, string statusCode=null)
         {
             var type = example.GetType();
             schemaRegistry.GetOrRegister(type);
 
             var actualTypeName = type.Name.Replace("[]", string.Empty);
             var schema = schemaRegistry.Definitions[actualTypeName];
-            if (!allowMultipleExamples)
-            {
-                schema.Example = example;
-                return schema;
-            }
+            //if (!allowMultipleExamples)
+            //{
+            //    schema.Example = example;
+            //    return schema;
+            //}
 
             string exampleFakeTypeName;
                 
@@ -68,7 +68,15 @@ namespace Carable.Swashbuckle.AspNetCore.DocumentWithCode
             {
                 Ref = "#/definitions/" + exampleFakeTypeName,
                 Example = example,
-                Properties = schema?.Properties
+                Properties = schema?.Properties,
+                Title = schema?.Title,
+                Description = schema?.Description,
+                Discriminator = schema?.Discriminator,
+                Format = schema?.Format,
+                Type = schema?.Type,
+                AdditionalProperties = schema?.AdditionalProperties,
+                ExternalDocs = schema?.ExternalDocs,
+                Xml = schema?.Xml,
             });
 
             return schemaRegistry.Definitions[exampleFakeTypeName];
