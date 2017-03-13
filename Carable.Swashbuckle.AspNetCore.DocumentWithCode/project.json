@@ -1,9 +1,9 @@
 ﻿{
-  "version": "0.0.3-*",
+  "version": "0.0.4-*",
   "description": "Allows you to customize your swagger documentation using code, including support for providing multiple examples for responses and parameters.",
 
   "packOptions": {
-    "releaseNotes": "Removed allow multiple examples parameter",
+    "releaseNotes": "Removed dependency on netcoreapp1.1",
     "requireLicenseAcceptance": false,
     "licenseUrl": "https://github.com/Carable/Carable.Swagger.DocumentWithCode/LICENSE",
     "owners": [
@@ -33,12 +33,7 @@
 
   "frameworks": {
     "net46": {},
-    "netcoreapp1.1": {
-      "imports": [
-        "dotnet5.6",
-        "portable-net45+win8"
-      ]
-    }
+    "netstandard1.6": {}
   }
 }
 
