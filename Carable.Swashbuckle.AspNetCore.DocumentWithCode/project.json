@@ -28,12 +28,22 @@
   },
 
   "dependencies": {
-    "Swashbuckle.AspNetCore": "1.0.0-rc3"
+    "Swashbuckle.AspNetCore.Swagger": "1.0.0-preview-0005",
+    "Swashbuckle.AspNetCore.SwaggerUI": "1.0.0-preview-0005",
+    "Swashbuckle.AspNetCore.SwaggerGen": "1.0.0-preview-0005"
   },
 
   "frameworks": {
-    "net46": {},
-    "netstandard1.6": {}
+    "net46": {
+      "frameworkAssemblies": {
+        "System.Xml": ""
+      }
+    },
+    "netstandard1.6": {
+      "dependencies": {
+        "System.Xml.XPath": "4.0.1" 
+      }
+    }
   }
 }
 
