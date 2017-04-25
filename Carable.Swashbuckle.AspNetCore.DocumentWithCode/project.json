@@ -28,9 +28,9 @@
   },
 
   "dependencies": {
-    "Swashbuckle.AspNetCore.Swagger": "1.0.0-preview-0005",
-    "Swashbuckle.AspNetCore.SwaggerUI": "1.0.0-preview-0005",
-    "Swashbuckle.AspNetCore.SwaggerGen": "1.0.0-preview-0005"
+    "Swashbuckle.AspNetCore.Swagger": "1.0.0",
+    "Swashbuckle.AspNetCore.SwaggerUI": "1.0.0",
+    "Swashbuckle.AspNetCore.SwaggerGen": "1.0.0"
   },
 
   "frameworks": {

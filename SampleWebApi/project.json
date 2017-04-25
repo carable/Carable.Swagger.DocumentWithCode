@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.1",
@@ -12,9 +12,9 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "Carable.Swashbuckle.AspNetCore.DocumentWithCode": { "target" : "project" },
-    "SampleWebApi.Dto": {"target": "project"},
-    "Swashbuckle.AspNetCore":"1.0.0-rc3"
+    "Carable.Swashbuckle.AspNetCore.DocumentWithCode": { "target": "project" },
+    "Swashbuckle.AspNetCore": "1.0.0",
+    "SampleWebApi.Dto": { "target": "project" }
   },
 
   "tools": {
