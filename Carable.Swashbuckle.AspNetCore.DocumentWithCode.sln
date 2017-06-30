@@ -1,22 +1,21 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26114.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Carable.Swashbuckle.AspNetCore.DocumentWithCode", "Carable.Swashbuckle.AspNetCore.DocumentWithCode\Carable.Swashbuckle.AspNetCore.DocumentWithCode.xproj", "{009E6720-ADCE-4F74-956F-DDCFD684FCA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carable.Swashbuckle.AspNetCore.DocumentWithCode", "Carable.Swashbuckle.AspNetCore.DocumentWithCode\Carable.Swashbuckle.AspNetCore.DocumentWithCode.csproj", "{009E6720-ADCE-4F74-956F-DDCFD684FCA2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SampleWebApi", "SampleWebApi\SampleWebApi.xproj", "{DDB34D6B-60F6-445D-9463-AE3E0C2C8240}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWebApi", "SampleWebApi\SampleWebApi.csproj", "{DDB34D6B-60F6-445D-9463-AE3E0C2C8240}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9791F0B9-D20E-4DD7-9C3C-7585687FEB43}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		NuGet.Config = NuGet.Config
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Test", "Test\Test.xproj", "{C53E324B-221A-4686-9BB1-161C8DA0FDE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{C53E324B-221A-4686-9BB1-161C8DA0FDE3}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SampleWebApi.Dto", "SampleWebApi.Dto\SampleWebApi.Dto.xproj", "{F8D3F49C-FFC7-4F6A-8909-6338ABCDA0B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWebApi.Dto", "SampleWebApi.Dto\SampleWebApi.Dto.csproj", "{F8D3F49C-FFC7-4F6A-8909-6338ABCDA0B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Allows you to customize your swagger documentation using code, including support for providing multiple examples for responses and parameters.</Description>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>Carable.Swashbuckle.AspNetCore.DocumentWithCode</AssemblyName>
+    <PackageId>Carable.Swashbuckle.AspNetCore.DocumentWithCode</PackageId>
+    <PackageTags>swagger;documentation;discovery;help;webapi;aspnet;aspnetcore</PackageTags>
+    <PackageReleaseNotes>Removed dependency on netcoreapp1.1</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/Carable/Carable.Swagger.DocumentWithCode</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Carable/Carable.Swagger.DocumentWithCode/LICENSE</PackageLicenseUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Xml.XPath" Version="4.0.1" />
+  </ItemGroup>
+
+</Project>
