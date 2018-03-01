@@ -14,24 +14,12 @@ namespace SampleWebApi
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration,IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
-            if (env.IsEnvironment("Development"))
-            {
-                // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-                builder.AddApplicationInsightsSettings(developerMode: true);
-            }
-
-            builder.AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
@@ -75,7 +63,7 @@ namespace SampleWebApi
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
             app.UseSwaggerUI(options =>
             {
-                options.ShowJsonEditor();
+                //options.ShowJsonEditor();
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 

@@ -16,7 +16,7 @@ namespace Carable.Swashbuckle.AspNetCore.DocumentWithCode
             else
                 responseDictionary.Add(statusCode, response);
 
-            if (example!=null)
+            if (example != null)
                 responseDictionary[statusCode].Schema = schemaRegistry.AddExampleToSchemaDefinitions(operationId, example, statusCode);
         }
 
@@ -36,41 +36,22 @@ namespace Carable.Swashbuckle.AspNetCore.DocumentWithCode
             }
         }
 
-        //TODO: https://github.com/domaindrivendev/Ahoy/issues/234
-        //public static void AddDefaultToParameter(this BodyParameter parameter, ISchemaRegistry schemaRegistry, string operationId, object @default)
-        //{
-        //    if (@default != null)
-        //        parameter.Schema = schemaRegistry.AddDefaultToSchemaDefinitions(operationId, @default);
-        //}
-        
-        private static Schema AddExampleToSchemaDefinitions(this ISchemaRegistry schemaRegistry, string operationId, object example, string statusCode=null)
+        private static Schema AddExampleToSchemaDefinitions(this ISchemaRegistry schemaRegistry, string operationId, object example, string statusCode = null)
         {
             var type = example.GetType();
             schemaRegistry.GetOrRegister(type);
 
             var actualTypeName = type.Name.Replace("[]", string.Empty);
-            var schema = schemaRegistry.Definitions[actualTypeName];
-            string exampleFakeTypeName=actualTypeName;
-            while (schemaRegistry.Definitions.ContainsKey(exampleFakeTypeName))
-            {
-                exampleFakeTypeName += "'";// we do not want long type names, rather just append some ' to have short names
-            }
+            string exampleFakeTypeName = actualTypeName;
 
-            //Why? https://github.com/domaindrivendev/Ahoy/issues/228 and https://github.com/domaindrivendev/Swashbuckle/issues/397
-            schemaRegistry.Definitions.Add(exampleFakeTypeName, new Schema
+            if (!schemaRegistry.Definitions.ContainsKey(actualTypeName))
             {
-                Ref = "#/definitions/" + exampleFakeTypeName,
-                Example = example,
-                Properties = schema?.Properties,
-                Title = schema?.Title,
-                Description = schema?.Description,
-                Discriminator = schema?.Discriminator,
-                Format = schema?.Format,
-                Type = schema?.Type,
-                AdditionalProperties = schema?.AdditionalProperties,
-                ExternalDocs = schema?.ExternalDocs,
-                Xml = schema?.Xml,
-            });
+                throw new Exception($"Could not find type name! {actualTypeName}");
+            }
+            else 
+            {
+                schemaRegistry.Definitions[actualTypeName].Example = example;
+            }
 
             return schemaRegistry.Definitions[exampleFakeTypeName];
         }
