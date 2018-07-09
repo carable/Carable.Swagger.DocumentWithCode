@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Description>Allows you to customize your swagger documentation using code, including support for providing multiple examples for responses and parameters.</Description>
     <TargetFramework>netstandard1.6</TargetFramework>
-    <VersionPrefix>1.2.0</VersionPrefix>
+    <VersionPrefix>2.0.0</VersionPrefix>
     <VersionSuffix>
     </VersionSuffix>
     <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
@@ -21,9 +21,9 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="2.5.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="2.5.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="2.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="3.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="3.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Xml.XPath" Version="4.0.1" />
